@@ -1,0 +1,11 @@
+
+
+# Fetch and insert all networks from un AS number, and insert them into a pf table
+# Here an example with some French ISPs
+
+/usr/local/bin/curl -s https://api.bgpview.io/asn/12322/prefixes |/usr/local/bin/jq --raw-output '.data | .ipv4_prefixes[].prefix, .ipv6_prefixes[].prefix' |pfctl -treseau_mobile -Tadd -f- #free
+/usr/local/bin/curl -s https://api.bgpview.io/asn/51207/prefixes |/usr/local/bin/jq --raw-output '.data | .ipv4_prefixes[].prefix, .ipv6_prefixes[].prefix' |pfctl -treseau_mobile -Tadd -f- #freemobile
+/usr/local/bin/curl -s https://api.bgpview.io/asn/5410/prefixes  |/usr/local/bin/jq --raw-output '.data | .ipv4_prefixes[].prefix, .ipv6_prefixes[].prefix' |pfctl -treseau_mobile -Tadd -f- #bouygues
+/usr/local/bin/curl -s https://api.bgpview.io/asn/15557/prefixes |/usr/local/bin/jq --raw-output '.data | .ipv4_prefixes[].prefix, .ipv6_prefixes[].prefix' |pfctl -treseau_mobile -Tadd -f- #sfr
+/usr/local/bin/curl -s https://api.bgpview.io/asn/12626/prefixes |/usr/local/bin/jq --raw-output '.data | .ipv4_prefixes[].prefix, .ipv6_prefixes[].prefix' |pfctl -treseau_mobile -Tadd -f- #sfr
+

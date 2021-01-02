@@ -1,0 +1,8 @@
+
+# Récupérer les ips de trident media guard, société missionnée par la hadopi pour collecter les IPs des seeders de torrents "Illegaux"
+
+# Ici on recupère le fichier compressé, filtre sur les mots trident et guard, puis on récupère les réseaux IPs. A ajouter dans une table pf ou dans ipset.
+
+wget "http://list.iblocklist.com/?list=ydxerpxkpcfqjaybcssw&fileformat=p2p&archiveformat=gz" -O - |zgrep -i trident |grep -i guard |awk -F: '{print $2}' |sed 's#-#:#' |awk '{print "ipcalc -r "$1}' |sh
+
+Ne pas oublier de filtrer sur ces réseaux en entrant mais aussi en sortant.
